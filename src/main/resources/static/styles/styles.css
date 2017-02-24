@@ -1,11 +1,21 @@
 img{
-    width: 10vw;
+    width: 18vw;
 }
 body{
     background-color: #1F1F1F;
     padding-left: 1em;
 }
 
-.col-md-2{   
-    width: 11vw;
+.col-md-2{
+    width: 20vw;
+  text-align: center;
+}
+
+.hidden-title{
+  color: #fefefe;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  margin-left: -50px;
+  top: 25%;
 }

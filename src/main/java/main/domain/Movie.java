@@ -1,8 +1,7 @@
 package main.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import javax.persistence.*;
 
 /**
  * Created by Ids van der Zee on 15-2-2017.
@@ -10,13 +9,32 @@ import lombok.NoArgsConstructor;
 
 
 @Getter
+@Entity
+@NoArgsConstructor
+@Builder
+public class Movie extends BaseMovie {
 
-public class Greeting {
-    private long id;
     private String content;
+    private String title;
+    private String imgUrl;
+    private int runningTime;
 
-    public Greeting(long id, String content) {
-        this.id = id;
+    /**
+     * @param title
+     * @param content
+     * @param imgUrl
+     * @param runnningTime
+     */
+    public Movie(String title, String content, String imgUrl, int runnningTime) {
+
         this.content = content;
+        this.imgUrl = imgUrl;
+        this.title = title;
+        this.runningTime = runnningTime;
+    }
+
+    @Override
+    public int runningTime() {
+        return this.runningTime;
     }
 }

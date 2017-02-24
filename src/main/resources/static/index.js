@@ -12,7 +12,7 @@ ReactDom.render(
         <Router history={browserHistory}>
             <Route path="/" component={App}>
                 <IndexRoute component={OverView} />
-                <Route path="detail" component={Detail} />
+                <Route path="detail/:id" component={Detail} />
             </Route>
         </Router>,
     document.getElementById("app")

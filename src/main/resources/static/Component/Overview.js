@@ -6,8 +6,8 @@ export class OverView extends React.Component{
     constructor(props){
         super(props);
         this.state = {movies: []}
-        this.updateMovies = this.updateMovies.bind(this);       
-        
+        this.updateMovies = this.updateMovies.bind(this);
+
     }
 
     componentDidMount(){
@@ -20,10 +20,25 @@ export class OverView extends React.Component{
         this.setState({movies: movies});
     }
 
+    hoverTitle(e){
+      $(".js-title" + e.target.classList[0]).removeClass("hidden");
+    }
+
+    stopHoverTitle(e){
+      $(".js-title" + e.target.classList[0]).addClass("hidden");
+    }
+
+    goToDetail(e){
+      browserHistory.push("detail/"+e.target.classList[0])
+    }
+
     render(){
         return <div className="row">
             {this.state.movies.map((movie, index) =>{
-                return <div className="col-md-2" key={movie.id}><p className="hidden">{movie.title}</p><img src={movie.imgUrl} /></div>
+              return <div className="col-md-2" key={index}>
+                <h3 className={"hidden hidden-title js-title" + index}>{movie.title}</h3>
+                <img onClick={(e) => this.goToDetail(e)} className={index} onMouseOut={(e) => this.stopHoverTitle(e)} onMouseOver={(e) => this.hoverTitle(e)} src={movie.imgUrl} />
+              </div>
             })}
         </div>
     }
