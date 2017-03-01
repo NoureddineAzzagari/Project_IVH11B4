@@ -1,21 +1,58 @@
-img{
-    width: 18vw;
+.overview-img{
+    width: 100%;
 }
+
 body{
     background-color: #1F1F1F;
-    padding-left: 1em;
 }
 
 .col-md-2{
-    width: 20vw;
   text-align: center;
+  padding: 0;
+  border: solid black 1px;
 }
 
-.hidden-title{
-  color: #fefefe;
+.full-height{
+  height: 100vh;
+}
+
+.overview-row{
+  margin-top: 50px;
+}
+
+.transparent-white{
+  background-color: #F2F2F2;
+  opacity: .4;
+}
+
+.cardWrap {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.description {
   position: absolute;
-  z-index: 1;
-  left: 50%;
-  margin-left: -50px;
-  top: 25%;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  background-color: #F2F2F2;
+  opacity: 1;
+  visibility: hidden;
+}
+
+.description > *{
+  margin-bottom: 25%;
+}
+
+.cardWrap:hover .description {
+  visibility: visible;
+  opacity: .8;
+}
+
+.title{
+  opacity: 1;
+  color: #000;
+  font-size: 1.5rem;
+  margin-top: 1rem;
 }

@@ -9,7 +9,7 @@ export const getMovies = () => {
 };
 
 export const getMovieById = (id) =>{
-  const req = new Request(`http://localhost:8080/api/movie/${id}`,{
+  const req = new Request(`http://localhost:8080/api/movies/${id}`,{
     headers:{
       method: "GET",
       credentials: "same-origin"

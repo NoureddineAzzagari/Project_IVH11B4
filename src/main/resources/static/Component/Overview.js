@@ -3,43 +3,41 @@ import {Link, browserHistory} from 'react-router';
 import {getMovies} from './../actions/movies';
 
 export class OverView extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {movies: []}
-        this.updateMovies = this.updateMovies.bind(this);
+  constructor(props){
+      super(props);
+      this.state = {movies: []};
+      this.updateMovies = this.updateMovies.bind(this);
 
-    }
+  }
 
-    componentDidMount(){
-        getMovies().then((json)=>{
-            this.updateMovies(json);
-        });
-    }
+  componentDidMount(){
+      getMovies().then((json)=>{
+          this.updateMovies(json);
+      });
+  }
 
-    updateMovies(movies){
-        this.setState({movies: movies});
-    }
+  updateMovies(movies){
+      this.setState({movies: movies});
+  }
 
-    hoverTitle(e){
-      $(".js-title" + e.target.classList[0]).removeClass("hidden");
-    }
+  render(){
+      return <div className="row overview-row">
+          {this.state.movies.map((movie, index) =>{
+            return <div className="col-md-2 col-sm-4 col-xs-6 col-lg-1" key={index}>
+              <div className="cardWrap" onClick={() => {browserHistory.push(`/detail/${index}`)}}>
+                <img src={movie.imgUrl} className="overview-img" />
+                <div className="description">
+                  <p className="title">
+                    <b>{movie.title}</b>
+                  </p>
+                  <p className="release-year">
+                    {movie.releaseDate}
+                  </p>
+                </div>
 
-    stopHoverTitle(e){
-      $(".js-title" + e.target.classList[0]).addClass("hidden");
-    }
-
-    goToDetail(e){
-      browserHistory.push("detail/"+e.target.classList[0])
-    }
-
-    render(){
-        return <div className="row">
-            {this.state.movies.map((movie, index) =>{
-              return <div className="col-md-2" key={index}>
-                <h3 className={"hidden hidden-title js-title" + index}>{movie.title}</h3>
-                <img onClick={(e) => this.goToDetail(e)} className={index} onMouseOut={(e) => this.stopHoverTitle(e)} onMouseOver={(e) => this.hoverTitle(e)} src={movie.imgUrl} />
               </div>
-            })}
+            </div>
+          })}
         </div>
-    }
+  }
 }
