@@ -1,7 +1,7 @@
 import React from 'react';
-import {getMovieById} from './../actions/movies';
+import {getMovieById} from '../../actions/movies';
 
-export class Detail extends React.Component{
+export class MovieDetail extends React.Component{
 
     constructor(props){
         super(props);

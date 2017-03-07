@@ -6,11 +6,13 @@ export class App extends React.Component{
   changeViewToMovies(){
     $(".active").removeClass("active");
     $(".movies").addClass("active");
+    browserHistory.push("/movies");
   }
 
   changeViewToTv(){
     $(".active").removeClass("active");
     $(".tv").addClass("active");
+    browserHistory.push("/tv");
   }
 
   render() {
@@ -28,8 +30,8 @@ export class App extends React.Component{
             </div>
             <div className="collapse navbar-collapse" id="myNavbar">
               <ul className="nav navbar-nav">
-                <li className="active movies" onClick={(e) => this.changeViewToMovies(e)}><a href="#">Movies</a></li>
-                <li className="tv"  onClick={(e) => this.changeViewToTv(e)}><a href="#">Tv series</a></li>
+                <li className="active movies" onClick={(e) => this.changeViewToMovies(e)}><a href="javascript: void(0)">Movies</a></li>
+                <li className="tv"  onClick={(e) => this.changeViewToTv(e)}><a href="javascript: void(0)">Tv series</a></li>
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li><a href="#"><span className="glyphicon glyphicon-user"></span> Sign Up</a></li>

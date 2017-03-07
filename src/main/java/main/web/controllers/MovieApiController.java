@@ -2,22 +2,20 @@ package main.web.controllers;
 
 import main.domain.BaseMovie;
 import main.domain.Movie;
+import main.domain.TvShow;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 @RequestMapping("/api")
 @RestController
 @CrossOrigin
 public class MovieApiController {
 
-    @CrossOrigin
     @RequestMapping("/movies")
-    public ArrayList<BaseMovie> getAllMovies() {
+    public Iterable<BaseMovie> getAllMovies() {
 
         ArrayList<BaseMovie> movies = new ArrayList<>();
 
@@ -59,7 +57,6 @@ public class MovieApiController {
         return movies;
     }
 
-    @CrossOrigin
     @RequestMapping("/movies/{id}")
     public BaseMovie getMovieById(){
         return new Movie(
@@ -70,4 +67,29 @@ public class MovieApiController {
                "2015"
         );
     }
+    @RequestMapping("/tv")
+    public Iterable<TvShow> getAllShows(){
+        ArrayList<TvShow> shows = new ArrayList<>();
+        shows.add(new TvShow(
+                null,
+                "show1",
+                "beschrijving 1",
+                "2016",
+                "https://images-na.ssl-images-amazon.com/images/M/MV5BNjRhMGI3ZGItZTMzMS00NzdmLWI1MzMtNjk0ZmY5ZjMyZDdkL2ltYWdlXkEyXkFqcGdeQXVyNTQ3MjE4NTU@._V1_SY1000_CR0,0,674,1000_AL_.jpg"));
+        shows.add(new TvShow(
+                null,
+                "show2",
+                "beschrijving 2",
+                "2017",
+                "https://images-na.ssl-images-amazon.com/images/M/MV5BNjRhMGI3ZGItZTMzMS00NzdmLWI1MzMtNjk0ZmY5ZjMyZDdkL2ltYWdlXkEyXkFqcGdeQXVyNTQ3MjE4NTU@._V1_SY1000_CR0,0,674,1000_AL_.jpg"));
+        shows.add(new TvShow(
+                null,
+                "show3",
+                "beschrijving 3",
+                "2015",
+                "https://images-na.ssl-images-amazon.com/images/M/MV5BNjRhMGI3ZGItZTMzMS00NzdmLWI1MzMtNjk0ZmY5ZjMyZDdkL2ltYWdlXkEyXkFqcGdeQXVyNTQ3MjE4NTU@._V1_SY1000_CR0,0,674,1000_AL_.jpg"));
+        return shows;
+    }
+
+
 }

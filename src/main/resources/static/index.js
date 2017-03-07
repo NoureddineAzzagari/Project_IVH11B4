@@ -2,17 +2,19 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import {createStore, combineReducers} from 'redux';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
-import {OverView} from './Component/Overview';
-import {Detail} from './Component/detail';
+import {MovieOverView} from './Component/Movies/movie-overview';
+import {MovieDetail} from './Component/Movies/movie-detail';
 import {App} from './Component/App';
-
+import {TvOverview} from './Component/TvShows/tv-overview';
 
 
 ReactDom.render(
         <Router history={browserHistory}>
             <Route path="/" component={App}>
-                <IndexRoute component={OverView} />
-                <Route path="detail/:id" component={Detail} />
+                <IndexRoute component={MovieOverView} />
+                <Route path="movies" component={MovieOverView} />
+                <Route path="tv" component={TvOverview} />
+                <Route path="movie/detail/:id" component={MovieDetail} />
             </Route>
         </Router>,
     document.getElementById("app")

@@ -4,15 +4,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by Ids van der Zee on 15-2-2017.
- */
-
-
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor
-@Builder
 public class Movie extends BaseMovie {
 
     private String content;
@@ -22,17 +17,17 @@ public class Movie extends BaseMovie {
     private String releaseDate;
 
     /**
-     * @param title
-     * @param content
-     * @param imgUrl
-     * @param runnningTime
+     * @param title title
+     * @param content description
+     * @param imgUrl image url
+     * @param runningTime running time
      */
-    public Movie(String title, String content, String imgUrl, int runnningTime, String releaseDate) {
+    public Movie(String title, String content, String imgUrl, int runningTime, String releaseDate) {
 
         this.content = content;
         this.imgUrl = imgUrl;
         this.title = title;
-        this.runningTime = runnningTime;
+        this.runningTime = runningTime;
         this.releaseDate = releaseDate;
     }
 
