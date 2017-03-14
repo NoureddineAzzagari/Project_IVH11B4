@@ -1,6 +1,4 @@
 var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 
 module.exports = {
   entry: './index.js',
@@ -8,14 +6,14 @@ module.exports = {
 
   devServer: {
     inline: true,
-    port: 3000
+    port: 3001
   },
-  
-  devtool: 'source-map',  
+
+  devtool: 'source-map',
 
   module: {
     loaders: [
-      {        
+      {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {

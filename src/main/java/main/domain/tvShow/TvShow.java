@@ -1,8 +1,9 @@
-package main.domain;
+package main.domain.tvShow;
 
 import lombok.Getter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class TvShow {
 
     @GeneratedValue
     private long id;
-    @OneToOne
+    @OneToMany
     private ArrayList<Season> seasons;
     private String name;
     private String description;

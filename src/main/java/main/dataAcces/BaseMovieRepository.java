@@ -1,6 +1,6 @@
 package main.dataAcces;
 
-import main.domain.BaseMovie;
+import main.domain.Movie.BaseMovie;
 import org.springframework.data.repository.CrudRepository;
 
 

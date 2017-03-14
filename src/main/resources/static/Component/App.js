@@ -35,7 +35,7 @@ export class App extends React.Component{
               </ul>
               <ul className="nav navbar-nav navbar-right">
                 <li><a href="#"><span className="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a onClick={()=>{browserHistory.push("/login")}} href="javascript:void(0)"><span className="glyphicon glyphicon-log-in"></span> Login</a></li>
               </ul>
             </div>
           </div>

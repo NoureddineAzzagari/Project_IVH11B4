@@ -16,8 +16,16 @@ body{
   height: 100vh;
 }
 
+.login-row{
+  margin-top: 200px;
+}
+
 .overview-row{
   margin-top: 50px;
+}
+
+.navbar{
+  margin-bottom: 50px;
 }
 
 .transparent-white{

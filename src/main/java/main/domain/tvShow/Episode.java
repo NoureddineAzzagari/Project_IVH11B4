@@ -1,4 +1,4 @@
-package main.domain;
+package main.domain.tvShow;
 
 import lombok.Getter;
 import javax.persistence.Entity;

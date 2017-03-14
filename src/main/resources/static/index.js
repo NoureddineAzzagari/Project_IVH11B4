@@ -6,6 +6,7 @@ import {MovieOverView} from './Component/Movies/movie-overview';
 import {MovieDetail} from './Component/Movies/movie-detail';
 import {App} from './Component/App';
 import {TvOverview} from './Component/TvShows/tv-overview';
+import {LoginPage} from './Component/login';
 
 
 ReactDom.render(
@@ -15,6 +16,7 @@ ReactDom.render(
                 <Route path="movies" component={MovieOverView} />
                 <Route path="tv" component={TvOverview} />
                 <Route path="movie/detail/:id" component={MovieDetail} />
+                <Route path="login" component={LoginPage} />
             </Route>
         </Router>,
     document.getElementById("app")

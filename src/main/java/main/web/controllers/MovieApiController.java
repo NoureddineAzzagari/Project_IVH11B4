@@ -1,11 +1,12 @@
 package main.web.controllers;
 
-import main.domain.BaseMovie;
-import main.domain.Movie;
-import main.domain.TvShow;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import main.dataAcces.*;
+import main.domain.Movie.BaseMovie;
+import main.domain.Movie.Movie;
+import main.domain.tvShow.TvShow;
+import main.domain.User.UserStateContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 
@@ -13,6 +14,31 @@ import java.util.ArrayList;
 @RestController
 @CrossOrigin
 public class MovieApiController {
+
+
+    private final BaseMovieRepository movieRepository;
+    private final EpisodeRepository episodeRepository;
+    private final SeasonRepository seasonRepository;
+    private final TvShowRepository tvShowRepository;
+    private final UserRepository userRepository;
+
+    @Autowired
+    public MovieApiController(BaseMovieRepository movieRepository, EpisodeRepository episodeRepository, SeasonRepository seasonRepository, TvShowRepository tvShowRepository, UserRepository userRepository) {
+        this.movieRepository = movieRepository;
+        this.episodeRepository = episodeRepository;
+        this.seasonRepository = seasonRepository;
+        this.tvShowRepository = tvShowRepository;
+        this.userRepository = userRepository;
+    }
+
+    @RequestMapping("/login")
+    public boolean login(String userName, String password){
+
+        UserStateContext userStateContext = new UserStateContext();
+
+
+        return true;
+    }
 
     @RequestMapping("/movies")
     public Iterable<BaseMovie> getAllMovies() {
