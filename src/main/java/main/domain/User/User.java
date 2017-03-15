@@ -4,12 +4,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 @Getter
 @NoArgsConstructor
 public class User {
 
+    @Id
+    @GeneratedValue
+    private long id;
     private String firstname; //required
     private String lastname; //required
     private String address; //required

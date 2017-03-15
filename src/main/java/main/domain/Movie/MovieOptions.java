@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Setter
+@NoArgsConstructor
 public class MovieOptions extends DecoratedMovie {
 
     private String name;

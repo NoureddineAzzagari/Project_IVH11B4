@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link, browserHistory} from 'react-router';
-import {getMovies} from '../../actions/movies';
+import {getMovies, Subject} from '../../actions/movies';
+
 
 export class MovieOverView extends React.Component{
   constructor(props){
@@ -10,14 +11,16 @@ export class MovieOverView extends React.Component{
 
   }
 
-  componentDidMount(){
-      getMovies().then((json)=>{
-          this.updateMovies(json);
-      });
+  observe(subject){
+    subject.attach(this);
   }
 
-  updateMovies(movies){
-      this.setState({movies: movies});
+  update(movies){
+    this.setState(movies);
+  }
+
+  componentDidMount(){
+      this.observe(new Subject());
   }
 
   render(){

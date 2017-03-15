@@ -1,18 +1,21 @@
 package main.domain.tvShow;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Season {
+
     @OneToMany
-    private ArrayList<Episode> episodes;
+    private List<Episode> episodes;
+
+    @Id
     @GeneratedValue
     private long id;
 
