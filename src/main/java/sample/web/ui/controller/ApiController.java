@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import sample.web.ui.ServiceInterfaces.IMovieService;
-import sample.web.ui.ServiceInterfaces.ITvShowService;
-import sample.web.ui.ServiceInterfaces.IUserService;
+import sample.web.ui.Service.interfaces.IMovieService;
+import sample.web.ui.Service.interfaces.ITvShowService;
+import sample.web.ui.Service.interfaces.IUserService;
 import sample.web.ui.domain.Movie.BaseMovie;
 import sample.web.ui.domain.tvShow.TvShow;
 

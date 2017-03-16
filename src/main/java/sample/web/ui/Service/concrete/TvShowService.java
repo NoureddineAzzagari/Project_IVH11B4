@@ -1,8 +1,8 @@
-package sample.web.ui.Service;
+package sample.web.ui.Service.concrete;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sample.web.ui.ServiceInterfaces.ITvShowService;
+import sample.web.ui.Service.interfaces.ITvShowService;
 import sample.web.ui.dataAcces.TvShowRepository;
 import sample.web.ui.domain.tvShow.TvShow;
 

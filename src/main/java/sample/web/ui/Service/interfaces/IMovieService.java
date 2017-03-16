@@ -1,4 +1,4 @@
-package sample.web.ui.ServiceInterfaces;
+package sample.web.ui.Service.interfaces;
 
 import sample.web.ui.domain.Movie.BaseMovie;
 

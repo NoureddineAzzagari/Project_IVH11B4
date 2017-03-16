@@ -1,8 +1,8 @@
-package sample.web.ui.Service;
+package sample.web.ui.Service.concrete;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sample.web.ui.ServiceInterfaces.IMovieService;
+import sample.web.ui.Service.interfaces.IMovieService;
 import sample.web.ui.dataAcces.BaseMovieRepository;
 import sample.web.ui.domain.Movie.BaseMovie;
 

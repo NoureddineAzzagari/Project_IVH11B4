@@ -1,8 +1,8 @@
-package sample.web.ui.Service;
+package sample.web.ui.Service.concrete;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sample.web.ui.ServiceInterfaces.IUserService;
+import sample.web.ui.Service.interfaces.IUserService;
 import sample.web.ui.dataAcces.UserRepository;
 import sample.web.ui.domain.User.Authenticated;
 import sample.web.ui.domain.User.User;
