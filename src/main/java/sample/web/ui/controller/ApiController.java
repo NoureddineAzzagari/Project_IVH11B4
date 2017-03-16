@@ -10,10 +10,6 @@ import sample.web.ui.Service.interfaces.IUserService;
 import sample.web.ui.domain.Movie.BaseMovie;
 import sample.web.ui.domain.tvShow.TvShow;
 
-/**
- * @author Rob Winch
- * @author Doo-Hwan Kwak
- */
 @RestController
 @RequestMapping("/api")
 public class ApiController {
