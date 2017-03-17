@@ -18,6 +18,12 @@ public class UserService implements IUserService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * controleerd of de opgegeven inlognaam en wachtwoord overeen komen met een user in de db
+     * @param userName inlognaam
+     * @param password wachtwoord
+     * @return true als user bestaat met deze username wachtwoord combinatie
+     */
     public boolean authenticate(String userName, String password){
         for (User user: userRepository.findAll()){
             if(user.getUserName().equals(userName) && user.getPassword().equals(password)){
@@ -27,5 +33,14 @@ public class UserService implements IUserService {
             }
         }
         return false;
+    }
+
+    /**
+     * voegt een nieuwe user toe in de db
+     * @param user toe te voegen user
+     */
+    @Override
+    public void addUser(User user) {
+        userRepository.save(user);
     }
 }

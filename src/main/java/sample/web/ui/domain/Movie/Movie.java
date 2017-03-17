@@ -15,12 +15,6 @@ public class Movie extends BaseMovie {
     private int runningTime;
     private String releaseDate;
 
-    /**
-     * @param title title
-     * @param content description
-     * @param imgUrl image url
-     * @param runningTime running time
-     */
     public Movie(String title, String content, String imgUrl, int runningTime, String releaseDate) {
 
         this.content = content;
