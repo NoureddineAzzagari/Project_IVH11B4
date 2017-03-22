@@ -13,6 +13,4 @@ public final class Configuration {
     public static Configuration getConfiguration(){
         return new Configuration();
     }
-
-
 }
