@@ -36,6 +36,10 @@ public class User {
         this.admin = builder.admin;
     }
 
+    public boolean getAdmin(){
+        return this.admin;
+    }
+
     public static class UserBuilder {
 
         private final String firstName;

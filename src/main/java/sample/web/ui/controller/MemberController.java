@@ -1,14 +1,17 @@
 package sample.web.ui.controller;
 
+import com.google.common.base.Joiner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sample.web.ui.Service.concrete.UserService;
 import sample.web.ui.domain.User.User;
+import sample.web.ui.viewModel.UserInfo;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
-/**
- * Created by Ids van der Zee on 22-3-2017.
- */
 @CrossOrigin
 @RestController
 @RequestMapping("/")
@@ -16,6 +19,7 @@ public class MemberController {
 
     private final UserService userService;
 
+    @Autowired
     public MemberController(UserService userService) {
         this.userService = userService;
     }
@@ -26,9 +30,31 @@ public class MemberController {
      * @param password: wachtwoord
      * @return true als correct anders false
      */
-    @RequestMapping("/login")
-    public boolean Authenticate(String userName, String password){
-        return userService.authenticate(userName, password);
+    @RequestMapping("login")
+    public boolean Authenticate(String userName, String password, HttpServletResponse res, @CookieValue(value = "userInfo", defaultValue = "") String userCookie){
+
+        if(userCookie != null && !userCookie.equals("")){
+            String user = userCookie.split("~~~")[0];
+            String pass = userCookie.split("~~~")[1];
+            String valid = userCookie.split("~~~")[2];
+
+            if(Boolean.valueOf(valid) && userService.authenticate(user, pass)) return true;
+        }
+
+        boolean valid = userService.authenticate(userName, password);
+        if(valid){
+            String[] userInfo = new String[3];
+            userInfo[0] = userName;
+            userInfo[1] = password;
+            userInfo[2] = String.valueOf(valid);
+
+            String userString = Joiner.on("~~~").skipNulls().join(userInfo);
+
+            Cookie cookie = new Cookie("userInfo", userString);
+
+            res.addCookie(cookie);
+        }
+        return valid;
     }
 
     /**
@@ -51,5 +77,25 @@ public class MemberController {
         if(telephoneNumber > 0) userBuilder.telephoneNumber(telephoneNumber);
         User user = userBuilder.build();
         userService.addUser(user);
+    }
+
+    /**
+     * Haalt aan de hand van de cookie gebruikers informatie op
+     * @param userCookie cookie met daarin gebruikersnaam en wachtwoord van de gebruiker
+     * @return gevuld UserInfo object
+     */
+    @RequestMapping("/getUserInfo")
+    public UserInfo getUserInfo(@CookieValue(value = "userInfo", defaultValue = "") String userCookie){
+        User userObj = null;
+        if(userCookie != null && !userCookie.equals("")){
+            String user = userCookie.split("~~~")[0];
+            String pass = userCookie.split("~~~")[1];
+            String valid = userCookie.split("~~~")[2];
+            if(Boolean.valueOf(valid)){
+                userObj = userService.getUser(user, pass);
+            }
+        }
+        return userObj != null ? new UserInfo(userObj.getUserName(), userObj.getFirstName(), userObj.getLastName(),
+                userObj.getEmailAddress(), userObj.getAddress(), userObj.getAdmin(), userObj.getTelephoneNumber()) : null;
     }
 }

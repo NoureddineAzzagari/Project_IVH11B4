@@ -43,4 +43,12 @@ public class UserService implements IUserService {
     public void addUser(User user) {
         userRepository.save(user);
     }
+
+    @Override
+    public User getUser(String userName, String password){
+        for(User user: userRepository.findAll()){
+            if(user.getUserName().equals(userName) && user.getPassword().equals(password)) return user;
+        }
+        return null;
+    }
 }
