@@ -4,9 +4,16 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sample.web.ui.Service.interfaces.IMovieService;
+import sample.web.ui.Service.strategy.ReleaseDateStrategy;
+import sample.web.ui.Service.strategy.SearchStrategy;
+import sample.web.ui.Service.strategy.TitleStrategy;
 import sample.web.ui.dataAcces.BaseMovieRepository;
+import sample.web.ui.dataAcces.UserRepository;
+import sample.web.ui.domain.Favourites;
 import sample.web.ui.domain.Movie.BaseMovie;
 import sample.web.ui.domain.Movie.Movie;
+import sample.web.ui.domain.User.User;
+import sample.web.ui.viewModel.MovieViewModel;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,24 +21,50 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
 public class MovieService implements IMovieService {
 
     private final BaseMovieRepository baseMovieRepository;
+    private final UserRepository userRepository;
+
+    private SearchStrategy searchStrategy;
 
     @Autowired
-    public MovieService(BaseMovieRepository baseMovieRepository) {
+    public MovieService(BaseMovieRepository baseMovieRepository, UserRepository userRepository) {
         this.baseMovieRepository = baseMovieRepository;
+        this.userRepository = userRepository;
     }
 
     /**
      * haalt alle films op uit de db
      * @return lijst met films
      */
-    public Iterable<BaseMovie> getAllMovies(){
-        return baseMovieRepository.findAll();
+    public MovieViewModel getAllMovies(long userId){
+        ArrayList<BaseMovie> allMovies = (ArrayList<BaseMovie>)baseMovieRepository.findAll();
+        User user = userRepository.findOne(userId);
+        if(user != null){
+            Favourites fav = user.getFavourites();
+            List<BaseMovie> favouriteMovies;
+            if(fav != null && fav.getMovies() != null && fav.getMovies().size() > 0){
+                favouriteMovies = fav.getMovies();
+
+                ArrayList<BaseMovie> duplicates = new ArrayList<>();
+                for(BaseMovie movie: allMovies){
+                    if(favouriteMovies.contains(movie)) duplicates.add(movie);
+                }
+                allMovies.removeAll(duplicates);
+            }
+            else{
+                return new MovieViewModel(allMovies, null);
+            }
+
+            return new MovieViewModel(allMovies, favouriteMovies);
+        }
+        return null;
     }
 
     /**
@@ -50,6 +83,19 @@ public class MovieService implements IMovieService {
     public boolean checkForMovies(){
         return baseMovieRepository.count() > 0;
 
+    }
+
+    /**
+     * zoekt door alle films om de juiste te vinden
+     * @param searchString zoekwoord
+     * @param searchOption zoek optie
+     * @return lijst van films
+     */
+    @Override
+    public Iterable<BaseMovie> searchMovies(String searchString, int searchOption) {
+        if(searchOption == 2) this.setStrategy(new ReleaseDateStrategy());
+        else this.setStrategy(new TitleStrategy());
+        return searchStrategy.searchMovies(searchString, baseMovieRepository.findAll());
     }
 
     /**
@@ -128,5 +174,13 @@ public class MovieService implements IMovieService {
             }
         }
         return sb.toString();
+    }
+
+    /**
+     * set de huidige strategy
+     * @param strategy nieuwe strategy
+     */
+    private void setStrategy(final SearchStrategy strategy){
+        this.searchStrategy = strategy;
     }
 }

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sample.web.ui.Service.concrete.UserService;
 import sample.web.ui.domain.User.User;
+import sample.web.ui.viewModel.LoginViewModel;
 import sample.web.ui.viewModel.UserInfo;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,23 +40,25 @@ public class MemberController {
             String pass = userCookie.split("~~~")[1];
             String valid = userCookie.split("~~~")[2];
 
-            if(Boolean.valueOf(valid) && userService.authenticate(user, pass)) return true;
+            if(Boolean.valueOf(valid) && userService.authenticate(user, pass).isAuthenticated()) return true;
         }
 
-        boolean valid = userService.authenticate(userName, password);
-        if(valid){
-            String[] userInfo = new String[3];
+        LoginViewModel viewModel = userService.authenticate(userName, password);
+        if(viewModel.isAuthenticated()){
+            String[] userInfo = new String[4];
             userInfo[0] = userName;
             userInfo[1] = password;
-            userInfo[2] = String.valueOf(valid);
+            userInfo[2] = String.valueOf(true);
+            userInfo[3] = String.valueOf(viewModel.getUserId());
 
             String userString = Joiner.on("~~~").skipNulls().join(userInfo);
 
             Cookie cookie = new Cookie("userInfo", userString);
 
             res.addCookie(cookie);
+            return true;
         }
-        return valid;
+        return false;
     }
 
     /**
@@ -97,5 +101,15 @@ public class MemberController {
         }
         return userObj != null ? new UserInfo(userObj.getUserName(), userObj.getFirstName(), userObj.getLastName(),
                 userObj.getEmailAddress(), userObj.getAddress(), userObj.getAdmin(), userObj.getTelephoneNumber()) : null;
+    }
+
+    /**
+     * logt de gebruiker uit
+     * @param res httpresponse
+     */
+    @RequestMapping("logout")
+    public void logout(HttpServletResponse res){
+        Cookie cookie = new Cookie("userInfo", null);
+        res.addCookie(cookie);
     }
 }

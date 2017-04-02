@@ -2,12 +2,14 @@ package sample.web.ui.domain.User;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import lombok.Setter;
+import sample.web.ui.domain.Favourites;
+
+import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class User {
 
@@ -23,6 +25,8 @@ public class User {
     private boolean admin; //required
     private int age; //required
     private int telephoneNumber; //optional
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Favourites favourites;
 
     private User(UserBuilder builder) {
         this.firstName = builder.firstName;
@@ -34,6 +38,7 @@ public class User {
         this.password = builder.password;
         this.emailAddress = builder.emailAddress;
         this.admin = builder.admin;
+        this.favourites = builder.favourites;
     }
 
     public boolean getAdmin(){
@@ -51,6 +56,7 @@ public class User {
         private String password;
         private String emailAddress;
         private boolean admin;
+        private Favourites favourites;
 
         public UserBuilder(String firstName, String lastName, String address, int age, String userName, String password, String emailAddress, boolean admin) {
             this.firstName = firstName;
@@ -65,6 +71,11 @@ public class User {
 
         public UserBuilder telephoneNumber(int telephoneNumber) {
             this.telephoneNumber = telephoneNumber;
+            return this;
+        }
+
+        public UserBuilder favourites(Favourites favourites){
+            this.favourites = favourites;
             return this;
         }
 
