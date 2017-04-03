@@ -28,4 +28,12 @@ public class Movie extends BaseMovie {
     public int runningTime() {
         return this.runningTime;
     }
+
+    public String getTitle(){
+        return this.title;
+    }
+
+    public String getReleaseDate(){
+        return this.releaseDate;
+    }
 }

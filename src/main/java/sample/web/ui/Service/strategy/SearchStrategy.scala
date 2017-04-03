@@ -24,7 +24,7 @@ class TitleStrategy extends SearchStrategy{
     for (movie: BaseMovie <- movies.asScala){
       val title = movie.asInstanceOf[Movie].getTitle.toLowerCase
       val searchedMovie = title match{
-        case `title` if title.contains(searchString) => movie
+        case `title` if title.contains(searchString.toLowerCase) => movie
         case _ => null
       }
       if(searchedMovie != null){

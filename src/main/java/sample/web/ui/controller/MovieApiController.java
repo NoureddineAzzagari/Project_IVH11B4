@@ -82,14 +82,27 @@ public class MovieApiController {
 
         Originator originator = new Originator();
 
-        careTaker.getSavedStates().forEach((Memento memento) -> {
-            if(memento.getState() != id){
-                originator.setState(id);
-                careTaker.addMemento(originator.saveToMemento());
+        ArrayList<Memento> mementos = new ArrayList<>();
+        if(careTaker.getSavedStates().size() > 0){
+            careTaker.getSavedStates().forEach((Memento memento) -> {
+                if(memento.getState() != id){
+                    originator.setState(id);
 
-                req.getSession().setAttribute("memento", careTaker);
+                    mementos.add(originator.saveToMemento());
+
+                    req.getSession().setAttribute("memento", careTaker);
+                }
+            });
+            for (Memento memento : mementos) {
+                careTaker.addMemento(memento);
             }
-        });
+        }
+        else{
+            originator.setState(id);
+            careTaker.addMemento(originator.saveToMemento());
+
+            req.getSession().setAttribute("memento", careTaker);
+        }
 
         return movieService.getMovieById(id);
     }
@@ -101,12 +114,14 @@ public class MovieApiController {
      */
     @RequestMapping("/recent")
     public Iterable<BaseMovie> getRecentMovies(HttpServletRequest req){
-        CareTaker careTaker = (CareTaker)req.getSession().getAttribute("memento");
+        CareTaker careTaker = req.getSession().getAttribute("memento") != null ? (CareTaker)req.getSession().getAttribute("memento") : new CareTaker();
         ArrayList<BaseMovie> movies = new ArrayList<>();
-        careTaker.getSavedStates().forEach((Memento state) -> {
-            long id = state.getState();
-            movies.add(movieService.getMovieById(id));
-        });
+        if(careTaker.getSavedStates().size() > 0){
+            careTaker.getSavedStates().forEach((Memento state) -> {
+                long id = state.getState();
+                movies.add(movieService.getMovieById(id));
+            });
+        }
         return movies;
     }
 
