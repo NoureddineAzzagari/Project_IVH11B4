@@ -36,7 +36,7 @@ public class Favourites {
     }
 
     public class MovieIterator{
-        private Favourites favourites;
+        private final Favourites favourites;
         private java.util.Iterator iterator;
         private int current;
 

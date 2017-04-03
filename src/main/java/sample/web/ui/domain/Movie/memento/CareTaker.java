@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Ids van der Zee on 2-4-2017.
  */
 public class CareTaker {
-    private ArrayList<Memento> savedStates = new ArrayList<>();
+    private final ArrayList<Memento> savedStates = new ArrayList<>();
 
     /**
      * voegt een nieuwe memento toe

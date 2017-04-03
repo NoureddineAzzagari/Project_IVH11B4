@@ -7,8 +7,8 @@ import lombok.Getter;
  */
 @Getter
 public class LoginViewModel {
-    private boolean authenticated;
-    private long userId;
+    private final boolean authenticated;
+    private final long userId;
 
     public LoginViewModel(boolean authenticated, long userId) {
         this.authenticated = authenticated;

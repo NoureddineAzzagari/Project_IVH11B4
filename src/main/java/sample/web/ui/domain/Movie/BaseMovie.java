@@ -13,5 +13,5 @@ public abstract class BaseMovie {
     @GeneratedValue
     private long id;
 
-    public abstract int runningTime();
+    protected abstract int runningTime();
 }

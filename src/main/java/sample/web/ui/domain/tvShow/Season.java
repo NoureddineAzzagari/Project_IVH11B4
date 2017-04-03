@@ -2,8 +2,10 @@ package sample.web.ui.domain.tvShow;
 
 import lombok.Getter;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
@@ -11,7 +13,7 @@ import java.util.List;
 public class Season {
 
     @OneToMany(cascade = javax.persistence.CascadeType.ALL)
-    private List<Episode> episodes;
+    private final List<Episode> episodes;
 
     @GeneratedValue
     @Id

@@ -4,7 +4,7 @@ package sample.web.ui.domain.Movie.memento;
  * Created by Ids van der Zee on 2-4-2017.
  */
 public class Memento {
-    private long state;
+    private final long state;
 
     public Memento(long stateToState){
         state = stateToState;

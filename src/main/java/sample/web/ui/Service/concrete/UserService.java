@@ -10,7 +10,6 @@ import sample.web.ui.domain.Movie.BaseMovie;
 import sample.web.ui.domain.User.Authenticated;
 import sample.web.ui.domain.User.User;
 import sample.web.ui.domain.User.UserStateContext;
-import sample.web.ui.domain.tvShow.TvShow;
 import sample.web.ui.viewModel.LoginViewModel;
 
 import java.util.ArrayList;
@@ -84,7 +83,7 @@ public class UserService implements IUserService {
             if (user.getFavourites() == null || user.getFavourites().getMovies() == null) {
                 ArrayList<BaseMovie> movies = new ArrayList<>();
                 movies.add(movie);
-                user.setFavourites(new Favourites(movies, new ArrayList<TvShow>()));
+                user.setFavourites(new Favourites(movies, new ArrayList<>()));
             } else {
                 Favourites fav = user.getFavourites();
                 fav.getMovies().add(movie);

@@ -50,12 +50,12 @@ public class User {
         private final String firstName;
         private final String lastName;
         private final String address;
-        private int age;
+        private final int age;
         private int telephoneNumber;
-        private String userName;
-        private String password;
-        private String emailAddress;
-        private boolean admin;
+        private final String userName;
+        private final String password;
+        private final String emailAddress;
+        private final boolean admin;
         private Favourites favourites;
 
         public UserBuilder(String firstName, String lastName, String address, int age, String userName, String password, String emailAddress, boolean admin) {

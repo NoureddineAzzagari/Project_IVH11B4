@@ -8,8 +8,8 @@ import sample.web.ui.domain.Movie.BaseMovie;
  */
 @Getter
 public class MovieViewModel {
-    private Iterable<BaseMovie> movies;
-    private Iterable<BaseMovie> favouriteMovies;
+    private final Iterable<BaseMovie> movies;
+    private final Iterable<BaseMovie> favouriteMovies;
 
     public MovieViewModel(Iterable<BaseMovie> movies, Iterable<BaseMovie> favouriteMovies) {
         this.movies = movies;

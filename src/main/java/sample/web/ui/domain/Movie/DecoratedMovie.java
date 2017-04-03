@@ -7,12 +7,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public abstract class DecoratedMovie extends BaseMovie {
+abstract class DecoratedMovie extends BaseMovie {
 
     @OneToOne
     protected BaseMovie movie;
 
-    protected DecoratedMovie(BaseMovie movie){
+    DecoratedMovie(BaseMovie movie){
         this.movie = movie;
     }
 }

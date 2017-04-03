@@ -16,12 +16,12 @@ public class TvShow {
     private long id;
 
     @OneToMany(cascade = javax.persistence.CascadeType.ALL)
-    private List<Season> seasons;
+    private final List<Season> seasons;
 
-    private String name;
-    private String description;
-    private String releaseDate;
-    private String imageUrl;
+    private final String name;
+    private final String description;
+    private final String releaseDate;
+    private final String imageUrl;
 
     public TvShow(List<Season> seasons, String name, String description, String releaseDate, String imageUrl) {
         this.seasons = seasons;

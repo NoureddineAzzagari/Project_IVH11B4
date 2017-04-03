@@ -142,10 +142,6 @@ public class TestMovieService {
     public void testCheckMoviesMoreThanZeroMovies(){
         BaseMovieRepository movieRepository = Mockito.mock(BaseMovieRepository.class);
 
-        ArrayList<BaseMovie> testMovies = new ArrayList<>();
-        testMovies.add(new Movie());
-        testMovies.add(new Movie());
-
         when(movieRepository.count()).thenReturn(2L);
 
         UserRepository userRepository = Mockito.mock(UserRepository.class);

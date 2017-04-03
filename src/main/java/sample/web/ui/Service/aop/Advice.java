@@ -17,7 +17,7 @@ public class Advice {
 
     }
 
-    private static Logger logger = LoggerFactory.getLogger(Advice.class);
+    private static final Logger logger = LoggerFactory.getLogger(Advice.class);
 
     @Before("pointcutMethod()")
     public void beforeMethod() {
