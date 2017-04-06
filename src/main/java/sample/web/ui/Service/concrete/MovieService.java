@@ -86,7 +86,6 @@ public class MovieService implements IMovieService {
      */
     public boolean checkForMovies(){
         return baseMovieRepository.count() > 0;
-
     }
 
     /**
